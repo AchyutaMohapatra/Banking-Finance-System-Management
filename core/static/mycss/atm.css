@@ -1,0 +1,120 @@
+body {
+    background-color: grey;
+}
+
+
+#platinum {
+    margin-left: 3%;
+    width: fit-content;
+    color: goldenrod;
+    letter-spacing: 3px;
+    transform: scaleY(2);
+    
+}
+
+#logo {
+    margin-left: 230px;
+    margin-top: -37px;
+    
+}
+
+.a
+{
+    position:fixed;
+    height: 300px;
+    width: 500px;
+    top:30%;
+    left:10%;
+    background-image: url(../img/bg.jpg);
+    
+    border-radius:13px;
+    box-shadow:5px 5px 5px black;
+}
+
+
+#name
+{
+    position: relative;
+    top: 160px;
+    left: 70px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transform: scaleY(2);
+    width: fit-content;
+    
+}
+
+*
+{
+    font-family:serif;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+}
+
+div#cvv {
+    position: relative;
+    top: 60px;
+    
+    
+}
+
+#cvv1
+{
+    position:absolute ;
+    right:5.2%;
+}
+
+#cvv2
+{
+    position:absolute ;
+    right:8.3%;
+}
+
+#cvv3
+{
+    position:absolute ;
+    right:11.4%;
+}
+
+.acc
+{   
+    font-size:1.5em;
+    position:relative;
+    top:10px;
+    text-align: center;
+    letter-spacing: 8px;
+    
+    
+}
+
+span#valid {
+    font-weight: normal;
+    position: relative;
+    font-size: x-small;
+    
+    top: -20px;
+    left: 150px;
+
+}
+#valid_date {
+    position: relative;
+    left: 190px;
+    top: -60px;
+    transform: scaleY(2);
+    letter-spacing: 2px;
+}
+#visa {
+    font-family: Permanent Marker;
+    font-size: 35px;
+    letter-spacing: 5px;
+    float: right;
+    margin-top: -20px;
+    font-weight: 400;
+}
+
+
+marquee {
+    font-size: 25px;
+    letter-spacing: 2px;
+    
+}

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Contact us📞</title>
+    <link rel="stylesheet" href="{% static 'mycss/contact.css' %}">
+</head>
+<body>
+
+<div class="wrapper">
+  <h2>Contact Me</h2>
+  <div id="error_message"></div>
+  <form id="myform" method="post">
+    {% csrf_token %}
+    <div class="input_field">
+        <input type="text"name="name" placeholder="Name" id="name">
+    </div>
+    <div class="input_field">
+        <input type="text"name="subject" placeholder="Subject" id="subject">
+    </div>
+    <div class="input_field">
+        <input type="text"name="phone" placeholder="Phone" id="phone">
+    </div>
+    <div class="input_field">
+        <input type="text"name="email" placeholder="Email" id="email">
+    </div>
+    <div class="input_field">
+        <textarea placeholder="Message"name="message" id="message"></textarea>
+    </div>
+    <div class="btn">
+        <input type="submit">
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

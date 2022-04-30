@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCKTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>ABA Bank Loan Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&family=Varela+Round&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'mycss/loan.css' %}">
+
+</head>
+
+<body>
+
+<header>Apply For Loan </header>
+<div id = "content">
+
+<form id="form" action = "test.html" method="POST" >
+  {% csrf_token %}
+
+<table class = "table">
+
+<tr><td>
+    <label for="city">City:</label></td>
+    <td><input id="city" name="city" type="text" required></td>
+</tr> 
+
+<tr><td>
+<label for="pan">Pan No:</label></td>
+<td><input id="pan" name="pan" type="text" maxlength = "10" required></td>
+</tr>
+<tr><td>
+<label for="name">Full Name:</label></td>
+<td> <input id="name" name="name" type="text" required maxlength = "140" required></td>
+</tr>
+
+<tr><td>
+<label for="pan">E-mail:</label></td>
+<td><input id="email" name="email" type="email" maxlength = "255" required>   
+</td></tr>
+
+<tr><td>
+<label for="mobile">Mobile No.:</label></td>
+<td>
+<input type="text" id="countrycode" value="+91" size = "1" disabled > 
+<input id="mobile" name="mobile" type="text" maxlength = "10" size = "15" required></td>
+</tr>
+<tr><td>
+    <label for="loan">Type Of Loan:</label></td>
+    <td> <input id="loan" name="loan" type="text" required maxlength = "20" required></td>
+    </tr>
+    <tr><td>
+      <label for="loanamount">Loan Amount:</label></td>
+      <td>
+      <input type="text"  value="₹" size = "1" disabled > 
+      <input id="loanamount" name="loanamount" type="text" maxlength = "10" size = "10" required></td>
+      </tr>
+      <tr><td>
+        <label for="LoanLength">Loan Length:</label></td>
+        <td><input id="LoanLength" name="loanlength" type="text" required></td>
+    </tr> 
+
+<tr><td>
+  <div class="btn">
+    <input type="submit">
+</div>
+<!-- <td><input id="otp" name="otp" type = "hidden" maxlength = "4" size = 6 placeholder = "Enter OTP" required>   
+</td></tr> -->
+
+</table>
+
+
+<!-- <div class = "allButtons">
+<button type="submit" id = "getOtpB"  >Get OTP</button>
+
+
+<button type="button" id = "submitB" style = "display: none"  >Submit</button>
+
+<button type="reset" id = "reset" >Reset</button> </div>
+
+
+<p id = "timer" style = "display: inline-block"> </p>
+<button type = "button"  id = "link" type = "button" onclick = "sendOtp(); btnclick()"> Resend OTP</button> 
+
+
+
+<div id = "error" class = "error" ></div> -->
+
+</form>
+ 
+
+<div>
+
+<!-- <div id = "newScreen"> Your appliction is successfully SUBMITTED. <br> Return to <b><a class="nav-link" href="{% url 'home' %}">Home</a></b> </div>
+    
+<script>
+    var panCard = document.getElementById("pan");
+var panEx = /([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+var mobNo = document.getElementById("mobile");
+var mobEx = /^\d{10}$/;
+var otpEx = /^\d{4}$/; 
+
+
+var form = document.getElementById('form');
+var errorElement = document.getElementById('error');
+var name = document.getElementById('name').value;
+var getOtpB = document.getElementById('getOtpB');  
+var submitB = document.getElementById('submitB');  
+var reset = document.getElementById('reset');  
+
+
+var link = document.getElementById("link");
+link.style.display = "none";
+var newScreen = document.getElementById("newScreen");
+newScreen.style.display = "none";
+var timerOn = true;
+
+
+var otp = document.getElementById('otp'); 
+
+
+
+
+
+form.addEventListener('submit', (e) => {
+  let messages = []
+  
+  if (panEx.test(panCard.value.toUpperCase()) == false ) {
+
+     messages.push("*Invalid PAN Number");
+}
+
+if (mobEx.test(mobNo.value) == false)   
+        {  
+             messages.push("*Invalid Mobile Number.")  
+        } 
+
+
+
+  if (messages.length > 0) {
+    e.preventDefault();
+    errorElement.innerText = messages.join(', \n');
+  }
+
+
+ if (messages.length == 0) {
+
+errorElement.innerText = " ";
+sendOtp();   
+
+}
+ e.preventDefault();
+
+})
+
+
+
+
+function verifyOtp() {
+submitB.onclick= function otpValidation() {
+ if (otpEx.test(otp.value) == false)   
+        {  
+            document.getElementById('error').innerHTML = "*Invalide OTP";
+        } 
+else {
+
+ document.getElementById('error').innerHTML = "";
+var raw = "{\n    \"mobile\": document.getElementById('mobile'),\n    \"otp\": 2222\n}";
+
+var requestOptions = {
+  method: 'POST',
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://be82e237-b88a-4237-873f-c49ad8dd999f.mock.pstmn.io/service/verifyOtp", requestOptions)
+  .then(response => response.text())
+  .then(result => (console.log(result), dislpayName(), (newScreen.style.display = "block"), (link.style.display = "none"), (timer.style.display = "none")))
+  .catch(error => console.log('error', error));
+}
+}
+}
+
+function sendOtp() {
+var raw = "{\n    \"panNumber\": \"document.getElementById('pan'),\",\n    \"city\": \"document.getElementById('city'),\",\n    \"fullname\": \"document.getElementById('name'),\",\n    \"email\": \"document.getElementById('email')\",\n    \"mobile\": document.getElementById('mobile')\n}";
+
+var requestOptions = {
+  method: 'POST',
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://be82e237-b88a-4237-873f-c49ad8dd999f.mock.pstmn.io/service/getOtp", requestOptions)
+  .then(response => response.text())
+  .then(result => (console.log(result), (result.status = "Success")? ((otp.type = "text"), (submitB.style.display = "block"), resendOtpLink(180),(getOtpB.style.display = "block"), (reset.style.display = "none"),(link.style.display = "block"), (getOtpB.style.display = "none"), verifyOtp() ): console.log("Error"))
+ 
+
+
+)
+  .catch(error => console.log('error', error));
+}
+
+
+
+
+function  resendOtpLink(resendOtpTime) {
+document.getElementById("link").disabled = true;
+  var m = Math.floor(resendOtpTime / 60);
+  var s = resendOtpTime % 60;
+  
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+  document.getElementById('timer').innerHTML = "Resend OTP in" + " " + m + ':' + s + "mins";
+ resendOtpTime -= 1;
+  
+  if(resendOtpTime >= 0 && timerOn) {
+    setTimeout(function() {
+       resendOtpLink(resendOtpTime);
+
+    }, 1000);
+    return;
+  }
+
+
+  if(!timerOn) {
+    return;
+
+  }
+  
+  
+link.style.disabled = "false";
+document.getElementById("link").disabled = false;
+link.style.color = "blue";
+counter
+if(counter >= 3)
+{
+document.getElementById("link").disabled = true;
+ document.getElementById('timer').innerHTML = "Please try again after an hour.";
+link.style.display = "none";
+}
+
+
+}
+
+
+var counter = 0;
+function btnclick() {
+link.style.color = "red";
+counter++;
+
+}
+
+function dislpayName() {
+var name = document.getElementById("name").value;
+alert("Thank you for verification😊😊😊" + " " + name);
+}
+
+
+</script> -->
+</body>
+</html>
